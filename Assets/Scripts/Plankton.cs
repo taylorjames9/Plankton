@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
-
-
-
+// The GameObject requires a Rigidbody component
+[RequireComponent (typeof (Rigidbody))]
 
 public class Plankton : MonoBehaviour {
 
@@ -34,7 +35,7 @@ public class Plankton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		GetComponent<Rigidbody>().AddForce (Random.Range (0,359), 0, Random.Range (0,359));
 	}
 	
 	// Update is called once per frame
