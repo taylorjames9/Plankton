@@ -22,7 +22,8 @@ public class Eco_Manager : MonoBehaviour {
 	void Start () {
 		int rand = Random.Range (25, 40);
 		for (int i=0; i< rand; i++) {
-			GameObject plankto = Instantiate(plankton_prefab, new Vector3(Random.Range (-20, 20), 0, Random.Range (-10, 12)), Quaternion.identity) as GameObject;
+			GameObject plankto = Instantiate(plankton_prefab, new Vector3(Random.Range (-50, 50), Random.Range (-20, -40), Random.Range (-30, 30)), Quaternion.identity) as GameObject;
+			plankto.GetComponent<Plankton>().Id = i;
 		}
 	}
 

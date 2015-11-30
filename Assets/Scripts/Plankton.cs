@@ -24,27 +24,54 @@ public class Plankton : MonoBehaviour {
 	public float TimeAlive{ get { return timeAlive; } set {timeAlive = value; } }
 	private int evolveNum;
 	public int EvolveNum { get { return evolveNum; } set {evolveNum = value; } }
+	private int id;
+	public int Id{ get { return id; } set { id = value; } }
 
 	private DomColor myDominantColor;
 	public DomColor MyDominantColor{ get { return myDominantColor; } set {myDominantColor = value; } }
 
-	public GameObject maturityIcon;
+	public Text maturityText;
+	public ParticleSystem mySporeEmitter;
 	public GameObject mySporeHolder;
 	public GameObject myBlackInkHolder;
+	private Color emitDominantColor;
+	public Color EmitDominantColor;
+
 
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Rigidbody>().AddForce (Random.Range (0,359), 0, Random.Range (0,359));
+		GetComponent<Rigidbody>().AddForce (Random.Range (0,400), 0, Random.Range (0,400));
+		//transform.FindChild ("t_MaturityLevel").GetComponent<Text> ().text = Id.ToString ();
+		//Debug.Log ("finding maturity level text " + transform.FindChild ("t_MaturityLevel").name);;
+		maturityText.text = Id.ToString ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (transform.position.x > 50) {
+			transform.position = new Vector3 (-50, transform.position.y, transform.position.z);
+			GetComponent<Rigidbody>().AddForce (Random.Range (0,100), 0, Random.Range (0,100));
+		}
+		if (transform.position.z > 30) {
+			transform.position = new Vector3 (transform.position.x, transform.position.y, -30);
+			GetComponent<Rigidbody>().AddForce (Random.Range (0,100), 0, Random.Range (0,100));
+		}
+		if (transform.position.x < -50) {
+			transform.position = new Vector3 (50, transform.position.y, transform.position.z);
+			GetComponent<Rigidbody>().AddForce (Random.Range (0,100), 0, Random.Range (0,100));
+		}
+		if (transform.position.z < -30) {
+			transform.position = new Vector3 (transform.position.x, transform.position.y, 30);
+			GetComponent<Rigidbody>().AddForce (Random.Range (0,100), 0, Random.Range (0,100));
+		}
 	}
 
 
 	public void OnMouseDown(){
+		mySporeEmitter.startColor = Color.yellow;
+		mySporeEmitter.Play ();
 
 	}
 
