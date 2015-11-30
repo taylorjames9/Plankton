@@ -122,8 +122,15 @@ public class Plankton : MonoBehaviour {
 
 	}
 
-	public void OnTriggerEnter(Collider other){
+	public void OnParticleCollision(GameObject other) {
+		Debug.Log ("my ID "+Id+" and the Id of other : "+other.transform.parent.transform.parent.GetComponent<Plankton>().Id);
 
+		if (Id != other.transform.parent.transform.parent.GetComponent<Plankton>().Id) {
+			Debug.Log ("I ( "+Id+" ) was hit by particle " + other.name + " " + other.transform.parent.transform.parent.GetComponent<Plankton>().Id);
+			Debug.Log ("Color I'm getting hit with " + other.GetComponent<ParticleSystem> ().startColor);
+		} else {
+			Debug.Log("Getting hit with my own spray");
+		}
 	}
 
 	public void Evolve(){
