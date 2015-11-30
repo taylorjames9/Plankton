@@ -27,24 +27,29 @@ public class Plankton : MonoBehaviour {
 	private int id;
 	public int Id{ get { return id; } set { id = value; } }
 
-	private DomColor myDominantColor;
-	public DomColor MyDominantColor{ get { return myDominantColor; } set {myDominantColor = value; } }
+	private DomColorState myDominantColorState;
+	public DomColorState MyDominantColorState{ get { return myDominantColorState; } set { myDominantColorState = value; } }
 
 	public Text maturityText;
 	public ParticleSystem mySporeEmitter;
 	public GameObject mySporeHolder;
 	public GameObject myBlackInkHolder;
-	private Color emitDominantColor;
-	public Color EmitDominantColor;
+	private Color dominantColor;
+	public Color DominantColor;
+
+	public Slider yellowSlider;
+	public Slider blueSlider;
+	public Slider redSlider;
 
 
 
 	// Use this for initialization
 	void Start () {
 		GetComponent<Rigidbody>().AddForce (Random.Range (0,400), 0, Random.Range (0,400));
-		//transform.FindChild ("t_MaturityLevel").GetComponent<Text> ().text = Id.ToString ();
-		//Debug.Log ("finding maturity level text " + transform.FindChild ("t_MaturityLevel").name);;
 		maturityText.text = Id.ToString ();
+
+		//Set initial color
+
 
 	}
 	
@@ -70,7 +75,7 @@ public class Plankton : MonoBehaviour {
 
 
 	public void OnMouseDown(){
-		mySporeEmitter.startColor = Color.yellow;
+		mySporeEmitter.startColor = DominantColor;
 		mySporeEmitter.Play ();
 
 	}
@@ -87,8 +92,30 @@ public class Plankton : MonoBehaviour {
 
 	}
 
-	public void CheckDominantColor(){
+	public void AssesDominantColor(){
+		if (AmtRed > AmtBlue && AmtRed > AmtYellow) {
+			MyDominantColorState = DomColorState.Red;
+			DominantColor = Color.red;
+		}
+		if (AmtBlue > AmtRed && AmtBlue > AmtYellow) {
+			MyDominantColorState = DomColorState.Blue;
+			DominantColor = Color.blue;
 
+		}
+		if (AmtYellow > AmtBlue && AmtYellow > AmtRed) {
+			MyDominantColorState = DomColorState.Yellow;
+			DominantColor = Color.yellow;
+		}
+
+		//Set Color of the body of the plankkton;
+		GetComponent<MeshRenderer>().material.color = DominantColor;
+
+	}
+
+	public void SetSliders(){
+		yellowSlider.value = AmtYellow;
+		blueSlider.value = AmtBlue;
+		redSlider.value = AmtRed;
 	}
 
 	public void SetDominantColor(){
