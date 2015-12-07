@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
 	public float IdealBlueVal{ get { return idealBlueVal; } set { idealBlueVal = value; } }
 	private float idealYellowVal;
 	public float IdealYellowVal{ get { return idealYellowVal; } set {idealYellowVal = value; } }
+	private float player_ID;
+	public float Player_ID{get{return player_ID;} set{ player_ID = value;}}
 
 	// Use this for initialization
 	void Start () {
